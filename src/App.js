@@ -1,0 +1,22 @@
+import React, { Component } from 'react';
+
+class App extends Component {
+
+  componentDidMount(){
+
+  }  
+
+  render() {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-1 col-xs-offset-11">
+            <h1>Hello !!</h1>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default App;
