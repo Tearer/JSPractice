@@ -706,9 +706,73 @@ class App extends Component {
     // window.print();
     // window.find();
 
-    /*8.2*/
-    console.log(window.location === document.location); //true
+    /*8.2.1*/
+    // console.log(window.location === document.location); //true
+    // var args = utils.getQueryStringArgs();
+    // console.log(args);
 
+    /*8.2.2*/
+    // location.assign("https://baidu.com");
+    // window.location = "https://baidu.com";
+    // location.href = "https://baidu.com";
+    // location.hash = "#section1";
+    // location.search = "?q=javascript";
+    // location.hostname = "www.yahoo.com";
+    // location.pathname = "mydir";
+    // location.port = 8080;
+    // location.reload();
+    // location.reload(true);
+
+    /*8.3.1*/
+    // function hasPlugin(name){
+    //   name = name.toLowerCase();
+    //   for (var i = 0; i < navigator.plugins.length; i++){
+    //     if (navigator.plugins[i].name.toLowerCase().indexOf(name) > -1){
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // }
+
+    // console.log(navigator.plugins)
+    // console.log(hasPlugin("Flash"));
+    // console.log(hasPlugin("Chrome PDF Plugin"));
+
+    // function hasIEPlugin(name){
+    //   try {
+    //     new ActiveXObject(name);
+    //     return true;
+    //   } catch (ex) {
+    //     return false;
+    //   }
+    // }
+    // console.log(hasIEPlugin("ShockwaveFlash.ShockwaveFlash"));
+
+    /*8.3.2*/
+
+    /*8.4*/
+    // console.log(screen);
+
+    /*8.5*/
+    // console.log(history === window.history);
+    // history.go(-1);
+    // history.go(1);
+    // history.go(2);
+    // history.go("baidu.com");
+    // history.back();
+    // history.forward();
+
+    /*9.1.2*/
+    //确定浏览器是否支持Netscape风格的插件
+    // var hasNSPlugins = !!(navigator.plugins && navigator.plugins.length);
+
+    //确定浏览器是否具有DOM1级规定的能力
+    // var hasDOM1 = !!(document.getElementById && document.createElement && document.getElementsByTagName);
+
+    /*9.3.3*/
+    // console.log(utils.client());
+
+    
 
 
 
