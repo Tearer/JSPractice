@@ -772,8 +772,9 @@ class App extends Component {
     /*9.3.3*/
     // console.log(utils.client());
 
+    console.log(document.nodeType)
     
-
+    
 
 
 

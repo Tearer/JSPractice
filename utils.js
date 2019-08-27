@@ -36,8 +36,8 @@ export function getQueryStringArgs(){
 
 //在浏览器环境下测试任何对象的某个特性是否存在，考虑到IE8及之前版本的怪异行为
 export function isHostMethod(object, property){
-  var t = typeof object[property];
-  return t == 'function' || 
+    var t = typeof object[property];
+    return t == 'function' || 
          (!!(t == 'object' && object[property])) ||
          t == 'unknown';
 }
@@ -217,4 +217,117 @@ export function client(){
         system: system
     };
   
+}
+
+//动态加载js文件，e.g: loadScript("client.js")
+export function loadScript(url){
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.scr = url;
+    document.body.appendChild(script);
+}
+
+//动态加载js代码，e.g: loadScriptString("function sayHi() {alert('hi');}")
+export function loadScriptString(code){
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    try {
+        script.appendChild(document.createTextNode(code));
+    } catch (ex) {
+        script.text = code;
+    }
+    document.body.appendChild(script);
+}
+
+//动态加载css文件，e.g: loadStyles("styles.css")
+export function loadStyles(url){
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = url;
+    var head = document.getElementsByTagName("head")[0];
+    head.appendChild(link);
+}
+
+//动态加载css代码，e.g: loadStyleString("body{background-color:red}")
+export function loadStyleString(css){
+    var style = document.createElement("style");
+    style.type = "text/css";
+    try {
+        style.appendChild(document.createTextNode(css));
+    } catch (ex) {
+        style.styleSheet.cssText = css;
+    }
+    var head = document.getElementsByTagName("head")[0];
+    head.appendChild(style);
+}
+
+//检查一个节点是不是另一个节点的后代
+function contains(refNode, otherNode){
+    if (typeof refNode.contains == "function" && (!client().engine.webkit >=522)){
+        return refNode.contains(otherNode);
+    } else if (typeof refNode.compareDocumentPosition == "function"){
+        return !!(refNode.compareDocumentPosition(otherNode) & 16);
+    } else { //兼容Safari 3以下版本，<522
+        var node = otherNode.parentNode;
+        do {
+            if (node === refNode){
+                return true;
+            } else {
+                node = node.parentNode;
+            }
+        } while (node !== null);
+        return false;
+    }
+}
+
+//获取dom元素文本，e.g: alert(getInnerText(div));    //"Hello world!"
+export function getInnerText(element){
+    return (typeof element.textContent == "string") ? element.textContent : element.innerText;
+}
+
+//设置dom元素文本，e.g: setInnerText(div, "Hello world!");
+export function setInnerText(element, text){
+    if (typeof element.textContent == "string"){
+        element.textContent = text;
+    } else {
+        element.innerText = text;
+    }
+}
+
+//获取dom元素在页面上的左偏移量
+export function getElementLeft(element){
+    var actualLeft = element.offsetLeft;
+    var current = element.offsetParent;
+    while (current !== null){
+        actualLeft += current.offsetLeft;
+        current = current.offsetParent;
+    }
+    return actualLeft;
+}
+
+//获取dom元素在页面上的上偏移量
+export function getElementTop(element){
+    var actualTop = element.offsetTop;
+    var current = element.offsetParent;
+    while (current !== null){
+        actualTop += current.offsetTop;
+        current = current.offsetParent;
+    }
+    return actualTop;
+}
+
+//获取浏览器视口大小
+export function getViewport(){
+    if (document.compatMode == "BackCompat"){
+        return {
+            width: document.body.clientWidth,
+            height: document.body.clientHeight,
+        };
+    } else {
+        return {
+            width: document.documentElement.clientWidth,
+            height: document.documentElement.clientHeight
+       }
+    }
 }
