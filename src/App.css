@@ -26,3 +26,19 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.linkC{
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+}
+.link{
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+}
+.menu{
+  position:absolute;
+  visibility:hidden;
+  background-color: silver;
+}

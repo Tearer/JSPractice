@@ -37,5 +37,98 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+   
+    <script type="text/javascript">
+      /*13.2.3*/
+      // var btn = document.getElementById("myBtn");
+      // btn.onclick = function(){
+      //   console.log(this.value);    //"myBtn"
+      // };   
+      // btn.addEventListener("click", function(){
+      //   console.log(this.id);
+      // }, false);
+      // btn.addEventListener("click", function(){
+      //   console.log("hello");
+      // }, false);
+
+      // var handler = function(){
+      //   console.log(this.id);
+      // };
+      // btn.addEventListener("click", handler, false);
+      // btn.removeEventListener("click", handler, false);
+
+      /*13.2.4*/
+      // btn.attachEvent("onclick", function(){
+      //   console.log("clicked");
+      // });
+      // EventUtil.addHandler(btn, "click", handler);
+      // EventUtil.removeHandler(btn, "click", handler);
+      // btn.onclick = function(event){
+      //   console.log(event.currentTarget === this);
+      //   console.log(event.target === this);
+      //   console.log(event)
+      // };
+      // document.body.onclick = function(event){ 
+      //   console.log(event.currentTarget === document.body); //true 
+      //   console.log(this === document.body); //true 
+      //   console.log(event.target === document.getElementById("myBtn")); //true
+      // };
+
+      /*13.3.1*/
+      // var handler = function(event) {
+      //   switch(event.type){
+      //     case "click":
+      //       console.log("Clicked");
+      //       break;
+      //     case "mouseover":
+      //       event.target.style.backgroundColor = "red";
+      //       break;
+      //     case "mouseout":
+      //       event.target.style.backgroundColor = "";
+      //       break;
+      //   }
+      // };
+      // btn.onclick = handler;
+      // btn.onmouseover = handler;
+      // btn.onmouseout = handler;
+      // btn.onclick = function(event){
+        // console.log("btn click");
+        // event.stopPropagation();
+        // console.log(event.eventPhase); //2
+        // var event = window.event;
+        // console.log(event);
+        // window.event.cancelBubble();
+      // };
+      // btn.attachEvent("onclick", function(event){
+      //   console.log(event.type);
+      // })
+      // document.body.addEventListener("click", function(event){
+      //   console.log(event.eventPhase); //1
+      // },true);
+      // document.body.onclick = function(event){
+        // console.log("body click");
+        // console.log(event.eventPhase); //3
+      // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
   </body>
 </html>
