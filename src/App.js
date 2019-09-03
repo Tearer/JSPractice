@@ -4,6 +4,7 @@ import * as utils from '../utils';
 import './App.css';
 import { async } from 'q';
 import Fifteen from './components/Fifteen';
+import Sixteen from './components/Sixteen';
 
 class App extends Component {
 
@@ -1311,6 +1312,7 @@ class App extends Component {
         </form>
 
         <Fifteen/>
+        <Sixteen/>
       </div>
     );
   }
