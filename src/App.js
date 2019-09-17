@@ -5,6 +5,7 @@ import './App.css';
 import { async } from 'q';
 import Fifteen from './components/Fifteen';
 import Sixteen from './components/Sixteen';
+import Twenty from './components/Twenty';
 
 class App extends Component {
 
@@ -1313,6 +1314,7 @@ class App extends Component {
 
         <Fifteen/>
         <Sixteen/>
+        <Twenty/>
       </div>
     );
   }

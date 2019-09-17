@@ -439,3 +439,26 @@ export var EventUtil = {
         }
     }
 }
+
+//判断是否是数组
+export function isArray(value){
+    return Object.prototype.toString.call(value) == "[object Array]";
+}
+
+//判断是否是原生函数，不适用COM对象实现的函数
+export function isFunction(value){
+    return Object.prototype.toString.call(value) == "[object Function]";
+}
+
+//判断是否是正则表达式
+export function isRegExp(value){
+    return Object.prototype.toString.call(value) == "[object RegExp]";
+}
+
+//函数节流
+export function throttle(method, context){
+    clearTimeout(method.tId);
+    method.Id = setTimeout(function(){
+        method.call(context);
+    }, 100);
+}
