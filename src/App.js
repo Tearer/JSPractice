@@ -6,6 +6,7 @@ import { async } from 'q';
 import Fifteen from './components/Fifteen';
 import Sixteen from './components/Sixteen';
 import Twenty from './components/Twenty';
+import Functions from './components/Functions';
 
 class App extends Component {
 
@@ -1315,6 +1316,7 @@ class App extends Component {
         <Fifteen/>
         <Sixteen/>
         <Twenty/>
+        <Functions/>
       </div>
     );
   }

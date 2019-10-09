@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import * as utils from '../../utils';
-import { declareFunction } from '@babel/types';
+// import * as utils from '../../utils';
+// import { file } from '@babel/types';
+// import { declareFunction } from '@babel/types';
 
 export default class Twenty extends Component{
 
@@ -385,14 +386,14 @@ export default class Twenty extends Component{
         // sessionStorage.setItem("name", "Bob");
         // sessionStorage.removeItem("name");
 
-        var indexedDB = window.indexedDB || window.msIndexDB || window.mozIndexDB || window.webkiIndexdDB;
-        var request, database;
-        request = indexedDB.open("admin", "1.0");
-        request.onerror = function(event){
-            console.log("Something bad happened while trying to open: " + event.target.errorCode);
-        }
-        request.onsuccess = function(event){
-            database = event.target.result;
+        // var indexedDB = window.indexedDB || window.msIndexDB || window.mozIndexDB || window.webkiIndexdDB;
+        // var request, database;
+        // request = indexedDB.open("admin", "1.0");
+        // request.onerror = function(event){
+        //     console.log("Something bad happened while trying to open: " + event.target.errorCode);
+        // }
+        // request.onsuccess = function(event){
+        //     database = event.target.result;
             // database = request.result;
 
             //已废弃
@@ -499,27 +500,381 @@ export default class Twenty extends Component{
             // }
 
             // store.deleteIndex("username");
+    
+        // }
+        // request.onupgradeneeded = function (event){
+        //     database = event.target.result;
+        //     var store = database.createObjectStore("users", {keyPath: "username"});
+        //     store.add(user);
+        // }
+
+        // var user = {
+        //     username: "007",
+        //     firstName: "James",
+        //     lastName: "Bond",
+        //     password: "foo"
+        // }
+        // var user2 = {
+        //     username: "008",
+        //     firstName: "PDD",
+        //     lastName: "Bond",
+        //     password: "foo"
+        // }
+
+        // function handleVisibilityChange(){
+        //     if (document.hidden){
+        //         console.log("page is hidden");
+        //     } else {
+        //         console.log("page is visible");
+        //     }
+        // }
+        // utils.EventUtil.addHandler(document, "visibilitychange", handleVisibilityChange);
+
+        // navigator.geolocation.getCurrentPosition(function(position){
+        //     console.log(position.coords.latitude, position.coords.longitude);
+        // }, function(error){
+        //     console.log("Error code: " + error.code);
+        //     console.log("Error message: " + error.message);
+        // }, {
+        //     enableHighAccuracy: true,
+        //     timeout: 5000,
+        //     maximumAge: 25000
+        // });
+
+        // var watchId = navigator.geolocation.watchPosition(function(position){
+        //     console.log(position.coords.latitude, position.coords.longitude);
+        // }, function(error){
+        //     console.log("Error code: " + error.code);
+        //     console.log("Error message: " + error.message);
+        // });
+        // navigator.geolocation.clearWatch(watchId);
+
+        // var filesList = document.getElementById("files-list");
+        // var filesList = document.getElementsByName("upload")
+        // utils.EventUtil.addHandler(filesList, "change", function(event){
+            // var files = utils.EventUtil.getTarget(event).files,
+            //     i = 0,
+            //     len = files.length;
+            
+            // while (i < len){
+            //     console.log(files[i].name + "(" + files[i].type + "," + files[i].size + " bytes)");
+            //     i++;
+            // }
+
+            // var files = utils.EventUtil.getTarget(event).files,
+            //     output = document.getElementById("myDiv20"),
+            //     type = "default",
+            //     reader = new FileReader(),
+            //     blob = utils.blobSlice(files[0], 0, 32),
+            //     url = utils.createObjectURL(files[0]);
+            
+            // console.log(files[0]);
+            // if (/image/.test(files[0].type)){
+            //     reader.readAsDataURL(files[0]);
+            //     type = "image";
+            // } else {
+            //     reader.readAsText(files[0]);
+            //     type = "text";
+            // }
+            // reader.onerror = function(){
+            //     console.log("error code: " + reader.error.code);
+            // };
+            // reader.onprogress = function(event){
+            //     if (event.lengthComputable){
+            //         console.log("event: " + event.loaded + "/" + event.total);
+            //     }
+            // };
+            // reader.onload = function(){
+            //     var html = "";
+            //     switch(type){
+            //         case "image":
+            //             html = "<img src=\"" + reader.result + "\">";
+            //             break;
+            //         case "text":
+            //             html = reader.result;
+            //             break;
+            //     }
+            //     output.innerHTML = html;
+            // };
+
+            // if (blob){
+            //     reader.readAsText(blob);
+            //     reader.onerror = function(){
+            //         output.innerHTML = "error code:" + reader.error.code;
+            //     };
+            //     reader.onload = function(){
+            //         output.innerHTML = reader.result;
+            //     };
+            // } else {
+            //     console.log("not support");
+            // }
+
+        //     if (url){
+        //         if (/image/.test(files[0].type)){
+        //             output.innerHTML = "<img src=\"" + url + "\">";
+        //         } else {
+        //             output.innerHTML = "not an image";
+        //         }
+        //     } else {
+        //         output.innerHTML = "not support";
+        //     }
+        // });
+
+        // var droptarget = document.getElementById("droptarget");
+        // function handleEvent(event){
+        //     var info = "",
+        //         // output = document.getElementById("output"),
+        //         data, xhr,
+        //         files, i, len;
+            
+        //     utils.EventUtil.preventDefault(event);
+
+        //     if (event.type == "drop"){
+        //         files = event.dataTransfer.files;
+        //         i = 0;
+        //         len = files.length;
+        //         data = new FormData();
+
+        //         while (i < len){
+        //             info += files[i].name + " (" + files[i].type + ", " + files[i].size + " bytes)<br>";
+        //             data.append("file" + i, files[i]);
+        //             i++;
+        //         }
+
+        //         // output.innerHTML = info;
+        //         console.log(info);
+        //         xhr = new XMLHttpRequest();
+        //         xhr.open("post", "/", true);
+        //         xhr.onreadystatechange = function(){
+        //             if (xhr.readyState == 4){
+        //                 console.log(xhr.responseText);
+        //             }
+        //         };
+        //         xhr.send(data);
+        //     }
+        // }
+
+        // utils.EventUtil.addHandler(droptarget, "dragenter", handleEvent);
+        // utils.EventUtil.addHandler(droptarget, "dragover", handleEvent);
+        // utils.EventUtil.addHandler(droptarget, "drop", handleEvent);
+
+        // console.log(performance)
+
+        // var worker = new Worker("https://www.google-analytics.com/analytics.js");
+        // worker.postMessage("start");
+        // worker.postMessage({
+        //     type: "command",
+        //     message: "start!"
+        // })
+        // worker.onmessage = function(event){
+        //     var data = event.data;
+        //     console.log(data);
+        // };
+        // worker.onerror = function(event){
+        //     console.log("error: " + event.filename + " (" + event.lineno + "): " + event.message);
+        // };
+        // worker.terminate();
+
+        //在页面中
+        // var data = [23, 4, 7, 9, 2, 14, 6, 651, 87, 41, 7789, 24],
+        //     worker = new Worker("./WebWorkerExample.js");
+        
+        // worker.onmessage = function(event){
+        //     var data = event.data;
+        //     console.log(data);
+        // }
+        // worker.postMessage(data);
+
+        /*附录*/
+        // for (var i = 0; i < 10; i++){
+        // }
+        // console.log(i)
+        
+        // function sum(num1, num2=0, ...nums){
+        //     var result = num1 + num2;
+        //     for (let i = 0, len = nums.length; i < len; i++){
+        //         result += nums[i];
+        //     }
+        //     return result;
+        // }
+        // var result = sum(1, 2, 3, 4, 5, 6);
+        // var result = sum(...[1, 2, 3, 4, 5, 6]);
+        // console.log(result);
+
+        // function myNumbers(){
+        //     for (var i = 0; i < 10; i++){
+        //         yield i * 2;
+        //     }
+        // }
+        // var generator = myNumbers();
+        // try {
+        //     while(true){
+        //         document.write(generator.next() + "<br/>");
+        //     }
+        // } catch(ex){
+
+        // } finally {
+        //     generator.close();
+        // }
+        
+        // var person = {
+        //     name: "Nicholas",
+        //     age: 29
+        // };
+        // var iterator = new Iterator(person);
+        // try {
+        //     while(true){
+        //         let value = iterator.next();
+        //         document.write(value.join(":") + "<br>");
+        //     }
+        // } catch(ex){
+
+        // }
+
+        // function sayName(name){
+        //     console.log(name);
+        // }
+        // function sum(num1, num2){
+        //     return num1 + num2;
+        // }
+        // function sayHi(){
+        //     console.log("hi");
+        // }
+        // console.log(sayName.length, sum.length, sayHi.length);
+        // function callSum1(num1, num2){
+        //     // return sum.apply(this, arguments);
+        //     return sum.call(this, num1, num2);
+        // }
+        // function callSum2(num1, num2){
+        //     return sum.apply(this, [num1, num2]);
+        // }
+        // console.log(callSum1(10, 10));
+        // console.log(callSum2(10, 10));
+
+        // window.color = "red";
+        // var o = { color: "blue" };
+        // function sayColor(){
+            // console.log(this.color);
+        // }
+        // sayColor();
+        // sayColor.call(this);
+        // sayColor.call(window);
+        // sayColor.call(o);
+        // var objectSayColor = sayColor.bind(o);
+        // objectSayColor();
+
+        // var obj = new Object("some text");
+        // console.log(obj instanceof String);
+        // var value = "25";
+        // var number = Number(value);
+        // console.log(typeof number); //number
+        // var obj = new Number(value);
+        // console.log(typeof obj); //object
+
+        // var stringValue = "hello world";
+        // var result = stringValue.concat("world", "!");
+        // console.log(result);
+        // console.log(stringValue.slice(3));          //"lo world"
+        // console.log(stringValue.substring(3));      //"lo world"
+        // console.log(stringValue.substr(3));         //"lo world"
+        // console.log(stringValue.slice(3, 7));       //"lo w"
+        // console.log(stringValue.substring(3, 7));   //"lo w"
+        // console.log(stringValue.substr(3, 7));      //"lo worl"
+        // console.log(stringValue.slice(-3));            //"rld"
+        // console.log(stringValue.substring(-3));        //"hello world"
+        // console.log(stringValue.substr(-3));           //"rld"
+        // console.log(stringValue.slice(3, -4));         //"lo w"
+        // console.log(stringValue.substring(3, -4));     //"hel"
+        // console.log(stringValue.substr(3, -4));        //""
+        // console.log(stringValue.indexOf("o"));  //4
+        // console.log(stringValue.lastIndexOf("o")); //7
+        // console.log(stringValue.indexOf("o", 6));  //7
+        // console.log(stringValue.lastIndexOf("o", 6)); //4
+        // console.log(stringValue.toLocaleUpperCase());
+        // console.log(stringValue.toUpperCase());
+        // console.log(stringValue.toLocaleLowerCase());
+        // console.log(stringValue.toLowerCase());
+        // var text = "cat, bat, sat, fat";
+        // var pattern = /.at/;
+        // var matches = text.match(pattern);
+        // console.log(matches.index);          //0
+        // console.log(matches[0]);             //"cat"
+        // console.log(pattern.lastIndex);      //0
+        // var pos = text.search(/at/);
+        // console.log(pos);
+        // var result = text.replace("at", "ond");
+        // result = text.replace(/at/g, "ond");
+        // result = text.replace(/(.at)/g, "word($1)");
+        // console.log(result);
+        // function htmlEscape(text){
+        //     return text.replace(/[<>"&]/g, function(match, pos, originalText){
+        //         switch(match){
+        //             case "<":
+        //                 return "&lt;";
+        //             case ">":
+        //                 return "&gt;";
+        //             case "&":
+        //                 return "&amp;";
+        //             case "\"":
+        //                 return "&quot;";
+        //         }
+        //     });
+        // }
+        // console.log(htmlEscape("<p class=\"greating\">Hello world!</p>"));
+
+        // var colorText = "red, blue, green, yellow";
+        // var colors1 = colorText.split(",");
+        // var colors2 = colorText.split(",", 2);
+        // var colors3 = colorText.split(/[^\,]+/);
+        // console.log(colors1, colors2, colors3);
+
+        // var stringValue = "yellow";
+        // console.log(stringValue.localeCompare("brick"));
+        // console.log(stringValue.localeCompare("yellow"));
+        // console.log(stringValue.localeCompare("zoo"));
+
+        // console.log(String.fromCharCode(104, 101, 108, 108, 111)); //"hello"
+
+        // var uri = "http://www.wrox.com/illegal value.htm#start";
+        // console.log(encodeURI(uri));
+        // console.log(encodeURIComponent(uri));
+        // var uri = "http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.htm%23start";
+        // console.log(decodeURI(uri));
+        // console.log(decodeURIComponent(uri));
+
+        // console.log(global === window); //true
+        // var global = function(){
+        //     return this;
+        // }();
+
+        // console.log(Math);
+        // var max = Math.max(3, 54, 32, 16);
+        // console.log(max);
+        // var min = Math.min(3, 54, 32, 16);
+        // console.log(min);
+        // var values = [1, 2, 3, 4, 5];
+        // var max = Math.max.apply(Math, values);
+        // console.log(max);
+        // Math.ceil(25.9);
+        // Math.round(25.9);
+        // Math.floor(25.1);
+        // 值 = Math.floor(Math.random() * 可能值的总数 + 第一个可能的值);
+        // var colors = ["red", "green", "blue", "yellow", "black", "purple", "brown"]; 
+        // var color = colors[utils.selectFrom(0, colors.length-1)];
+        // console.log(color);
+        // console.log(Math.pow(10, 6));
 
 
-        }
-        request.onupgradeneeded = function (event){
-            database = event.target.result;
-            var store = database.createObjectStore("users", {keyPath: "username"});
-            store.add(user);
-        }
 
-        var user = {
-            username: "007",
-            firstName: "James",
-            lastName: "Bond",
-            password: "foo"
-        }
-        var user2 = {
-            username: "008",
-            firstName: "PDD",
-            lastName: "Bond",
-            password: "foo"
-        }
+
+
+
+        
+
+
+
+
+
 
 
 
@@ -568,7 +923,10 @@ export default class Twenty extends Component{
             <br/>
             <h2>Twenty</h2>
             <button id="my-btn">Button</button>
-            <div id="myDiv20" className="draggable" style={{width:"200px", height:"200px", position:"absolute", background:"red"}}></div>
+            <div id="droptarget" className="draggable" style={{width:"200px", height:"200px", position:"absolute", background:"red"}}></div>
+            <input name="upload" id="files-list" type="file" multiple></input>
+            {/* <input name="upload" type="file" multiple></input> */}
+
         </div>
         )
     }

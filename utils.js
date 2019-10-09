@@ -604,3 +604,42 @@ export var SubCookieUtil = {
         this.setAll(name, null, new Date(0), path, domain, secure);
     }
 }
+
+//blob slice()方法
+export function blobSlice(blob, startByte, length){
+    if (blob.slice){
+        return blob.slice(startByte, length);
+    } else if (blob.webkitSlice){
+        return blob.webkitSlice(startByte, length);
+    } else if (blob.mozSlize){
+        return blob.mozSlize(startByte, length);
+    } else {
+        return null;
+    }
+}
+
+//创建URL对象
+export function createObjectURL(blob){
+    if (window.URL){
+        return window.URL.createObjectURL(blob);
+    } else if (window.webkitURL){
+        return window.webkitURL.createObjectURL(blob);
+    } else {
+        return null;
+    }
+}
+
+//释放对象URL占用的内存
+export function revokeObjectURL(url){
+    if (window.URL){
+        window.URL.revokeObjectURL(url);
+    } else if (window.webkitURL){
+        window.webkitURL.revokeObjectURL(url);
+    }
+}
+
+//生成随机数
+export function selectFrom(lowerValue, upperValue) {
+    var choices = upperValue - lowerValue + 1;
+    return Math.floor(Math.random() * choices + lowerValue);
+}
