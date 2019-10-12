@@ -7,6 +7,7 @@ import Fifteen from './components/Fifteen';
 import Sixteen from './components/Sixteen';
 import Twenty from './components/Twenty';
 import Functions from './components/Functions';
+import DOMArts from './components/DOMArts';
 
 class App extends Component {
 
@@ -1317,6 +1318,7 @@ class App extends Component {
         <Sixteen/>
         <Twenty/>
         <Functions/>
+        <DOMArts/>
       </div>
     );
   }

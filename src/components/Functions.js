@@ -209,21 +209,160 @@ export default class Functions extends Component{
         // friend.sayName();
         // console.log(friend);
 
-        function SuperType(){
-            this.property = true;
-        }
-        SuperType.prototype.getSuperValue = function(){
-            return this.property;
-        };
-        function SubType(){
-            this.subproperty = false;
-        }
-        SubType.prototype = new SuperType();
-        SubType.prototype.getSubValue = function(){
-            return this.subproperty;
-        }
-        var instance = new SubType();
-        console.log(instance); //true
+        // function SuperType(){
+        //     this.property = true;
+        // }
+        // SuperType.prototype.getSuperValue = function(){
+        //     return this.property;
+        // };
+        // function SubType(){
+        //     this.subproperty = false;
+        // }
+        // SubType.prototype = new SuperType();
+        // SubType.prototype.getSubValue = function(){
+        //     return this.subproperty;
+        // }
+        // var instance = new SubType();
+        // console.log(instance); //true
+
+        // function SuperType(name){
+        //     this.name = name;
+        //     this.colors = ["red", "blue", "green"];
+        // }
+        // SuperType.prototype.sayName = function(){
+        //     console.log(this.name);
+        // };
+        // function SubType(name, age){
+        //     SuperType.call(this, name);
+        //     this.age = age;
+        // }
+        // SubType.prototype = new SuperType();
+        // SubType.prototype.constructor = SubType;
+        // SubType.prototype.sayAge = function(){
+        //     console.log(this.age);
+        // }
+        // var instance1 = new SubType("Nicholas", 29);
+        // var instance2 = new SubType("Greg", 27);
+        // console.log(instance1);
+        // console.log(instance2);
+
+        // function object(o){
+        //     function F(){}
+        //     F.prototype = o;
+        //     return new F();
+        // }
+        // var person = {
+        //     name: "Nicholas",
+        //     friends: ["Shelby", "Court", "Van"]
+        // };
+        // // var anotherPerson = object(person);
+        // var anotherPerson = Object.create(person, {
+        //     name: {
+        //         value: "Greg"
+        //     }
+        // });
+        // // anotherPerson.name = "Greg";
+        // anotherPerson.friends.push("Rob");
+        // // var yetAnotherPerson = object(person);
+        // var yetAnotherPerson = Object.create(person);
+        // yetAnotherPerson.name = "Linda";
+        // yetAnotherPerson.friends.push("Barbie");
+        // console.log(person);
+        // console.log(anotherPerson);
+        // console.log(yetAnotherPerson);
+
+        // function createAnother(original){
+        //     var clone = object(original);   //通过调用函数创建一个新对象
+        //     clone.sayHi = function(){       //以某种方式来增强这个对象
+        //         console.log("hi");
+        //     }
+        //     return clone;
+        // }
+        // var person = {
+        //     name: "Nicholas",
+        //     friends: ["Shelby", "Court", "Van"]
+        // };
+        // var anotherPerson = createAnother(person);
+        // anotherPerson.sayHi();
+        // console.log(anotherPerson);
+
+        // function inheritPrototype(subType, superType){
+            // var prototype = object(superType.prototype);  //创建对象
+            // function F(){}
+            // F.prototype = superType.prototype;
+            // var prototype = new F();
+        //     // console.log(prototype)
+        //     prototype.constructor = subType;              //增强对象
+        //     subType.prototype = prototype;                //指定对象
+        // }
+        // function SuperType(name){
+        //     this.name = name;
+        //     this.colors = ["red", "blue", "green"];
+        // }
+        // SuperType.prototype.sayName = function(){
+        //     console.log(this.name);
+        // }
+        // function SubType(name, age){
+        //     SuperType.call(this, name);
+        //     this.age = age;
+        // }
+        // inheritPrototype(SubType, SuperType);
+        // SubType.prototype.sayAge = function(){
+        //     console.log(this.age);
+        // };
+        // var instance = new SubType("Nico", 29);
+        // console.log(instance);
+
+        // var name = "The Window";
+        // var object = {
+        //     name: "My Object",
+        //     getName: function(){
+        //         return this.name;
+        //     }
+        // };
+        // console.log(object.getName());
+        // console.log((object.getName)());
+        // console.log((object.getName = object.getName)()); //赋值表达式的值是函数本身，所有this得不到维持
+
+        // function Person(name){
+        //     this.getName = function(){
+        //         return name;
+        //     };
+        //     this.setName = function(value){
+        //         name = value;
+        //     }
+        // }
+        // var person = new Person("Nicholas");
+        // console.log(person.getName());
+        // person.setName("Greg");
+        // console.log(person.getName());
+
+        // var Person;
+        // (function(){
+        //     var name = "";
+        //     Person = function(value){
+        //         name = value;
+        //     };
+        //     Person.prototype.getName = function(){
+        //         return name;
+        //     };
+        //     Person.prototype.setName = function(value){
+        //         name = value;
+        //     };
+        // })();
+        // var person1 = new Person("Nicholas");
+        // console.log(person1.getName());
+        // person1.setName("Greg");
+        // console.log(person1.getName());
+        // var person2 = new Person("Michael");
+        // console.log(person1.getName()); 
+        // console.log(person2.getName());
+        
+        
+
+
+
+
 
 
 
