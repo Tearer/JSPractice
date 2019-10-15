@@ -923,7 +923,7 @@ export default class Twenty extends Component{
             <br/>
             <h2>Twenty</h2>
             <button id="my-btn">Button</button>
-            <div id="droptarget" className="draggable" style={{width:"200px", height:"200px", position:"absolute", background:"red"}}></div>
+            {/* <div id="droptarget" className="draggable" style={{width:"200px", height:"200px", position:"absolute", background:"red"}}></div> */}
             <input name="upload" id="files-list" type="file" multiple></input>
             {/* <input name="upload" type="file" multiple></input> */}
 

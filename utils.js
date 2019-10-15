@@ -643,3 +643,26 @@ export function selectFrom(lowerValue, upperValue) {
     var choices = upperValue - lowerValue + 1;
     return Math.floor(Math.random() * choices + lowerValue);
 }
+
+//添加函数在页面加载完成后执行
+export function addLoadEvent(func){
+    var oldonload = window.onload;
+    if (typeof window.onload != 'function'){
+        window.onload = func;
+    } else {
+        window.onload = function(){
+            oldonload();
+            func();
+        }
+    }
+}
+
+//把一个节点插入到另一个节点之后
+export function insertAfter(newElement, targetElement){
+    var parent = targetElement.parentNode;
+    if (parent.lastChild == targetElement){
+        parent.appendChild(newElement);
+    } else {
+        parent.insertBefore(newElement, targetElement.nextSibling);
+    }
+}
