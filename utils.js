@@ -666,3 +666,45 @@ export function insertAfter(newElement, targetElement){
         parent.insertBefore(newElement, targetElement.nextSibling);
     }
 }
+
+//获取下一个元素节点，e.g: getNextElement(headers[i].nextSibling)
+export function getNextElement(node) {
+    if (node.nodeType === 1){
+        return node;
+    }
+    if (node.nextSibling) {
+        return getNextElement(node.nextSibling);
+    }
+    return null;
+}
+
+//检测是否支持特定的属性，e.g: elementSupportsAttribute('input', 'placeholder')
+export function elementSupportsAttribute(elementName, attribute) {
+    if (!document.createElement) return false;
+    var temp = document.createElement(elementName);
+    return (attribute in temp);
+}
+
+//去科学计数法格式
+export function toNonExponential(num) {
+    var m = num.toExponential().match(/\d(?:\.(\d*))?e([+-]\d+)/);
+    return num.toFixed(Math.max(0, (m[1] || '').length - m[2]));
+}
+
+//取整
+export function integer(num) {
+    return Math[num < 0 ? 'ceil' : 'floor'](num);
+}
+
+//记忆函数
+export var memoizer = function (memo, formula) {
+    var recur = function (n) {
+        var result = memo[n];
+        if (typeof result !== 'number') {
+            result = formula (recur, n);
+            memo[n] = result;
+        }
+        return result;
+    };
+    return recur;
+}

@@ -8,6 +8,7 @@ import Sixteen from './components/Sixteen';
 import Twenty from './components/Twenty';
 import Functions from './components/Functions';
 import DOMArts from './components/DOMArts';
+import GoodParts from './components/GoodParts';
 
 class App extends Component {
 
@@ -1319,6 +1320,7 @@ class App extends Component {
         <Twenty/>
         <Functions/>
         <DOMArts/>
+        <GoodParts/>
       </div>
     );
   }
