@@ -687,6 +687,9 @@ export function elementSupportsAttribute(elementName, attribute) {
 
 //去科学计数法格式
 export function toNonExponential(num) {
+    if (typeof num !== 'number') {
+        num = Number(num);
+    }
     var m = num.toExponential().match(/\d(?:\.(\d*))?e([+-]\d+)/);
     return num.toFixed(Math.max(0, (m[1] || '').length - m[2]));
 }
@@ -708,3 +711,71 @@ export var memoizer = function (memo, formula) {
     };
     return recur;
 }
+
+//除法函数
+export function accDiv(arg1, arg2){ 
+    var t1 = 0, t2 = 0, r1, r2; 
+    var arg1Str = toNonExponential(arg1.toString());
+    var arg2Str = toNonExponential(arg2.toString());
+    try{
+        t1 = arg1Str.split(".")[1].length
+    }catch(e){}   //--小数点后的长度
+    try{
+        t2 = arg2Str.split(".")[1].length
+    }catch(e){}  //--小数点后的长度
+    r1 = Number(arg1Str.replace(".",""))  //--去除小数点变整数
+    r2 = Number(arg2Str.replace(".",""))  //--去除小数点变整数
+    return (r1 / r2) * Math.pow(10, t2 - t1);   //---整数相除 在乘上10的平方  小数点的长度
+} 
+
+//乘法函数
+export function accMul(arg1,arg2){ 
+    var m = 0,
+        s1 = toNonExponential(arg1.toString()),
+        s2 = toNonExponential(arg2.toString());;
+    try{
+        m += s1.split(".")[1].length
+    }catch(e){} 
+    try{
+        m += s2.split(".")[1].length
+    }catch(e){} 
+    return Number(s1.replace(".","")) * Number(s2.replace(".","")) / Math.pow(10, m) 
+} 
+
+//加法函数
+export function accAdd(arg1,arg2){ 
+    var r1, r2, m; 
+    var arg1Str = toNonExponential(arg1.toString());
+    var arg2Str = toNonExponential(arg2.toString());
+    try{
+        r1 = arg1Str.split(".")[1].length
+    }catch(e){
+        r1 = 0
+    } 
+    try{
+        r2 = arg2Str.split(".")[1].length
+    }catch(e){
+        r2 = 0
+    } 
+    m = Math.pow(10,Math.max(r1, r2)) 
+    return (arg1 * m + arg2 * m) / m 
+} 
+
+//减法函数
+export function accSub(arg1,arg2){ 
+    var r1,r2,m,n; 
+    try{
+        r1 = toNonExponential(arg1.toString()).split(".")[1].length
+    }catch(e){
+        r1 = 0
+    } 
+    try{
+        r2 = toNonExponential(arg2.toString()).split(".")[1].length
+    }catch(e){
+        r2 = 0
+    } 
+    m = Math.pow(10, Math.max(r1, r2)); 
+    n = (r1 >= r2) ? r1 : r2; 
+    return ((arg1 * m - arg2 * m) / m).toFixed(n); 
+}
+
