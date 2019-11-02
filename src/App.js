@@ -9,6 +9,8 @@ import Twenty from './components/Twenty';
 import Functions from './components/Functions';
 import DOMArts from './components/DOMArts';
 import GoodParts from './components/GoodParts';
+import High from './components/High';
+
 
 class App extends Component {
 
@@ -1321,6 +1323,7 @@ class App extends Component {
         <Functions/>
         <DOMArts/>
         <GoodParts/>
+        <High/>
       </div>
     );
   }

@@ -52,9 +52,9 @@ export default class GoodParts extends Component{
                 this.value += typeof inc === 'number' ? inc : 1;
             }
         };
-        myObject.increment();
+        // myObject.increment();
         // console.log(myObject.value);
-        myObject.increment(2);
+        // myObject.increment(2);
         // console.log(myObject.value);
 
         var sum = add(3, 4);
@@ -66,6 +66,7 @@ export default class GoodParts extends Component{
             var helper = function () {
                 // console.log(this);
                 that.value = add(that.value, that.value);
+                // this.value = add(this.value, this.value)
             };
             helper();
         };
@@ -821,6 +822,18 @@ export default class GoodParts extends Component{
         var text = 'last, first, middle';
         var d = text.split(/\s*,\s*/); // ["last", "first", "middle"]
         var e = text.split(/\s*(,)\s*/); // ["last", ",", "first", ",", "middle"]
+
+        String.prototype.substring();
+        String.prototype.toLocaleLowerCase();
+        String.prototype.toLocaleUpperCase();
+        String.prototype.toLowerCase();
+        String.prototype.toUpperCase();
+
+        a = String.fromCharCode(67, 97, 116); // 'Cat'
+
+
+
+
 
 
 

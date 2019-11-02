@@ -219,12 +219,29 @@ export function client(){
   
 }
 
-//动态加载js文件，e.g: loadScript("client.js")
-export function loadScript(url){
+//动态加载js文件，e.g: loadScript("client.js", function(){ alert("File is loaded!") })
+export function loadScript(url, callback){
     var script = document.createElement("script");
     script.type = "text/javascript";
+    if (script.readyState){ //IE
+        script.onreadystatechange = function (){
+            if (script.readyState === "loaded" || script.readyState === "complete"){
+                script.onreadystatechange = null;   //删除readystatechange事件句柄，保证事件不会被处理两次
+                if (typeof callback === "function"){
+                    callback();
+                }
+            }
+        };
+    } else {
+        script.onload = function (){
+            if (typeof callback === "function"){
+                callback();
+            }
+        };
+    }
     script.scr = url;
-    document.body.appendChild(script);
+    // document.body.appendChild(script);
+    document.getElementsByTagName("head")[0].appendChild(script);
 }
 
 //动态加载js代码，e.g: loadScriptString("function sayHi() {alert('hi');}")
@@ -711,12 +728,22 @@ export var memoizer = function (memo, formula) {
     };
     return recur;
 }
+export function memoize(fundamental, cache) {
+    cache = cache || {};
+    var shell = function (arg) {
+        if(!char.hasOwnProperty(arg)){
+            cache[arg] = fundamental[arg];
+        }
+        return cache[arg];
+    };
+    return shell;
+}
 
 //除法函数
 export function accDiv(arg1, arg2){ 
     var t1 = 0, t2 = 0, r1, r2; 
-    var arg1Str = toNonExponential(arg1.toString());
-    var arg2Str = toNonExponential(arg2.toString());
+    var arg1Str = toNonExponential(arg1);
+    var arg2Str = toNonExponential(arg2);
     try{
         t1 = arg1Str.split(".")[1].length
     }catch(e){}   //--小数点后的长度
@@ -731,8 +758,8 @@ export function accDiv(arg1, arg2){
 //乘法函数
 export function accMul(arg1,arg2){ 
     var m = 0,
-        s1 = toNonExponential(arg1.toString()),
-        s2 = toNonExponential(arg2.toString());;
+        s1 = toNonExponential(arg1),
+        s2 = toNonExponential(arg2);
     try{
         m += s1.split(".")[1].length
     }catch(e){} 
@@ -745,8 +772,8 @@ export function accMul(arg1,arg2){
 //加法函数
 export function accAdd(arg1,arg2){ 
     var r1, r2, m; 
-    var arg1Str = toNonExponential(arg1.toString());
-    var arg2Str = toNonExponential(arg2.toString());
+    var arg1Str = toNonExponential(arg1);
+    var arg2Str = toNonExponential(arg2);
     try{
         r1 = arg1Str.split(".")[1].length
     }catch(e){
@@ -765,12 +792,12 @@ export function accAdd(arg1,arg2){
 export function accSub(arg1,arg2){ 
     var r1,r2,m,n; 
     try{
-        r1 = toNonExponential(arg1.toString()).split(".")[1].length
+        r1 = toNonExponential(arg1).split(".")[1].length
     }catch(e){
         r1 = 0
     } 
     try{
-        r2 = toNonExponential(arg2.toString()).split(".")[1].length
+        r2 = toNonExponential(arg2).split(".")[1].length
     }catch(e){
         r2 = 0
     } 
@@ -779,3 +806,7 @@ export function accSub(arg1,arg2){
     return ((arg1 * m - arg2 * m) / m).toFixed(n); 
 }
 
+//判断是否为number类型
+export function isNumber(value) {
+    return typeof value === 'number' && isFinite(value);
+}
