@@ -85,6 +85,46 @@ export default class High extends Component{
             return memfactorial.cache[n];
         }
 
+        function processArray(items, process, callback){
+            var todo = items.concat();
+            setTimeout(function (){
+                process(todo.shift());
+                if(todo.length > 0){
+                    setTimeout(arguments.callee, 25);
+                } else {
+                    callback(items);
+                }
+            }, 25);
+        }
+        var items = [123, 789, 323, 778, 232, 654, 219, 543, 321, 160];
+        function outputValue(value) {
+            console.log(value);
+        }
+        // processArray(items, outputValue, function(){
+        //     console.log("Done!");
+        // });
+
+        var req = new XMLHttpRequest();
+        var getLatestPacketInterval, lastLength = 0;
+        function readyStateHandler() {
+            if (req.readyState === 3 && getLatestPacketInterval === null) {
+                getLatestPacketInterval = window.setInterval(function(){
+                    getLatestPacket();
+                }, 15);
+            }
+            if (req.readyState === 4) {
+                clearInterval(getLatestPacketInterval);
+                getLatestPacket();
+            }
+        }
+        function getLatestPacket() {
+            var length = req.responseText.length;
+            var packet = req.responseText.substring(lastLength, length);
+            // processPacket(packet);
+            lastLength = length;
+        }
+        
+
 
 
 
