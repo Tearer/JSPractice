@@ -10,6 +10,8 @@ import Functions from './components/Functions';
 import DOMArts from './components/DOMArts';
 import GoodParts from './components/GoodParts';
 import High from './components/High';
+import DontKnow from './components/DontKnow';
+import ES6 from './components/ES6';
 
 
 class App extends Component {
@@ -1324,6 +1326,8 @@ class App extends Component {
         <DOMArts/>
         <GoodParts/>
         <High/>
+        <DontKnow/>
+        <ES6/>
       </div>
     );
   }

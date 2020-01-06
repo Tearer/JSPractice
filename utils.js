@@ -474,7 +474,7 @@ export function isRegExp(value){
 
 //函数节流
 export function throttle(method, context){
-    clearTimeout(method.tId);
+    clearTimeout(method.Id);
     method.Id = setTimeout(function(){
         method.call(context);
     }, 100);
@@ -810,3 +810,47 @@ export function accSub(arg1,arg2){
 export function isNumber(value) {
     return typeof value === 'number' && isFinite(value);
 }
+
+//整数检测
+if (!Number.isInteger) {
+    Number.isInteger = function(num) {
+        return typeof num == "number" && num % 1 == 0;
+    };
+}
+
+//检查是否为安全的整数
+if (!Number.isSafeInteger) {
+    Number.isSafeInteger = function(num) {
+        return Number.isInteger( num ) && Math.abs( num ) <= Number.MAX_SAFE_INTEGER;
+    }; 
+}
+
+//判断数值是否NaN
+if (!Number.isNaN) {
+    Number.isNaN = function(n) {
+        return ( typeof n === "number" && window.isNaN( n ) ); 
+    };
+}
+
+if (!Number.isNaN) {
+    Number.isNaN = function(n) {
+        return n !== n;
+    };
+}
+
+//判断2个值是否相等
+if (!Object.is) {
+    Object.is = function(v1, v2) {
+        // 判断是否是-0
+        if (v1 === 0 && v2 === 0) {
+            return 1 / v1 === 1 / v2;
+        }
+        // 判断是否是NaN 
+        if (v1 !== v1) {
+            return v2 !== v2;
+        }
+        // 其他情况
+        return v1 === v2;                  
+    };
+}
+
