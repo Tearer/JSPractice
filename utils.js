@@ -854,3 +854,13 @@ if (!Object.is) {
     };
 }
 
+//将给的的值转换为无符号的32位整数
+export function toUint32(value) {
+    return Math.floor(Math.abs(Number(value))) % Math.pow(2, 32);
+}
+
+//判断属性值是否是一个数组索引
+export function isArrayIndex(key) {
+    let numericKey = toUint32(key);
+    return String(numericKey) == key && numericKey < (Math.pow(2, 32) - 1);
+}

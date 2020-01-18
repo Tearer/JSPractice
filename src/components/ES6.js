@@ -140,6 +140,102 @@ export default class ES6 extends Component{
          * node.js环境的拒绝处理，unhandledRejection事件，rejectionHandled事件，
          * 通过事件rejectionHandled和事件unhandledRejection将潜在未处理的拒绝存储为一个列表，
          * 等待一段时间后检查列表便能够正确地跟踪潜在的未处理拒绝。
+         * 浏览器环境的拒绝处理：unhandledrejection, rejectionhandled。
+         * 响应多个Promise：Promise.all()，当迭代对象中所有Promise都被完成后返回的Promise才会被完成，
+         * 只要有一个被拒绝，返回的Promise没等所有的Promise都完成就立即被拒绝。
+         * Promise.race()，如果先解决的是已完成的Promise，则返回已完成Promise，先解决的是已拒绝Promise，
+         * 则返回已拒绝Promise。
+         * 
+         * Proxy和Reflection*
+         * *
+         * new Proxy()可创建代替其他目标对象的代理，
+         * Reflection API以对象的形式出现，对象中方法的默认特性与相同的底层操作一致，代理可以覆写这些操作。
+         * set代理陷阱可以拦截写入属性操作，get代理陷阱可以拦截读取属性操作。
+         * set(trapTarget, key, value, receiver)。
+         * get(trapTarget, key, receiver)。
+         * receiver指操作发生的对象，通常是proxy对象。
+         * has(trapTarget, key)，in操作符检测给定对象中是否含有某个属性，如果自有属性或原型属性匹配这个
+         * 名称或Symbol就返回true。拦截HasProperty操作，常见的in运算符。如果原对象不可配置或禁止扩展，
+         * has拦截会报错。
+         * deleteProperty(trapTarget, key)，拦截delete操作符。
+         * setPrototypeOf(trapTarget, key)，拦截Object.setPrototypeOf方法。
+         * getPrototypeOf(trapTarget)，拦截Object.getPrototypeOf()。
+         * 注意Reflect.getPrototypeOf()和Reflect.setPrototypeOf()与Object.getPrototypeOf()和
+         * Object.setPrototypeOf()的区别。
+         * preventExtensions(trapTarget)，拦截Object.preventExtentsions操作。
+         * isExtensible(trapTarget)，拦截Object.isExtensible操作。
+         * defineProperty(trapTarget, key, descriptor)，拦截Object.defineProperty操作，
+         * 无论将什么对象作为第三个参数传递给Object.defineProperty()方法，只有属性enumerable、
+         * configureable、value、get和set将出现在传递给defineProperty陷阱的描述符对象中。
+         * getOwnPropertyDescriptor(trapTarget, key)，拦截Object.getOwnPropertyDescriptor()，
+         * 返回值必须是null、undefined或一个对象，且对象属性值必须是如上标准属性。
+         * Object.defineProperty返回第一个参数，Reflect.defineProperty返回true或false。
+         * Object.getOwnPropertyDescriptor会将非对象参数转换为参数，Reflect.getOwnPropertyDescriptor
+         * 非对象参数会报错。
+         * ownKeys(trapTarget)代理陷阱拦截内部方法[[OwnPropertyKeys]]，对象自身属性的读写操作。
+         * 返回的数组中包含所有自身属性的键名，
+         * Object.getOwnPropertyNames()和Object.keys()返回的结果将Symbol类型的属性名排除在外，
+         * Object.getOwnPropertySymbols()，
+         * Object.assign支持字符串和Symbol两种类型，
+         * for-in循环。
+         * apply(trapTarget, thisArg, argumentsList)和construct(trapTarget, argumentsList, newTarget)
+         * 覆写内部方法[[Call]]和[[Construct]]；
+         * 可以在函数内判断new.target是否为undefined来限制必须用new调用，当不能改写函数是，用代理construct
+         * 比较方便；
+         * 可在apply陷阱中调用Reflect.construct()，这样直接调用就是new调用效果，函数内部new.target等于
+         * 函数本身；
+         * 可以给Reflect.construct()第三个参数作为赋值给new.target的值；
+         * 可调用类构造函数，可以在apply陷阱中给类构造函数创建一个实例，这样不用new可以直接运行类构造函数。
+         * Proxy.revocable()创建可撤销的代理，返回值proxy可被撤销的代理对象，revoke撤销代理要调用的函数。
+         * 模拟数组行为；
+         * 创建使用的代理的类：在构造函数中返回一个代理，当类实例化时返回的对象是代理而不是实例，构造函数中this
+         * 的值是该实例，实例成为代理的目标，代理则像原本的实例那样被返回，实例私有化，只有代理间接访问。
+         * 将代理用作原型，这样使所有实例共享一个代理；
+         * 当代理被用作原型时，trapTarget是原型对象，receiver是实例对象；
+         * 在原型上使用get陷阱，处理访问不存在属性；
+         * 在原型上使用set陷阱，无论原型中是否存在同名属性，给该属性赋值时都将默认在实例中创建该属性；
+         * 在原型上使用has陷阱，in操作符先搜索自身属性，如果不存在，则沿原型链搜索。
+         * 类的prototype属性不可写，函数的prototype属性没有限制，可以用代理重写。
+         * 
+         * 模块*
+         * *
+         * 模块是自动运行在严格模式下并且没法退出运行的JavaScript代码，在模块顶部this的值是undefined。
+         * export关键字导出，未导出的即为模块私有，无法从模块外访问。
+         * import关键字导入，不能给导入的绑定重新赋值。
+         * 都必须在其他语句和函数之外使用，不能有条件导出或动态导出。
+         * 使用as关键词对导入或导出重命名。
+         * export default导出模块默认值，只能有一个。
+         * 用逗号将默认的本地名称与大括号包裹的非默认值分隔开，import语句中，默认值必须排到非默认值之前。
+         * 可以导出已经导入的内容。
+         * 可以无绑定导入。
+         * Web浏览器加载模块：
+         * <script type="module" src="module.js"></script>
+         * <script type="module">内联代码</script>
+         * <script type="module">会忽略defer属性，因为在执行时defer属性默认是存在的。
+         * async脚本的顺序不会影响脚本执行的顺序，脚本下载完立即执行，不必等待包含的文档完成解析，async模块
+         * 与之类似。
+         * Worker加载：let worker = new Worker("module.js", {type: "module"}) 。
+         * 模块说明符以/、./、../开头或完整的URL。
+         * 
+         * 附录*
+         * *
+         * Number.isInteger()根据整数与浮点数的储存差异来判断数值是否为整数。
+         * Number.isSafeInteger()判断数值是否为安全整数，Number.MAX_SAFE_INTEGER与Number.MIN_SAFE_INTEGER
+         * 之间。
+         * Math添加一些新的数学运算方法。
+         * Unicode标识符。
+         * 不建议的__proto__的属性，在es6中，Object.prototype.__proto__被定义成一个访问器属性，其get方法会调用
+         * Object.getPrototypeOf()方法，set方法会调用Object.setPrototypeOf()方法。
+         * __proto__可以直接设置对象字面量的原型。
+         * 
+         * ES7(2016)*
+         * *
+         * 指数运算符：a ** b，与Math.pow(a, b)结果相同，二进制运算符中优先级最高。
+         * Array.prototype.includes(要搜索的值, 开始搜索的索引位置)，检查数组是否有某个值，可以includes()，
+         * 需要知道值索引位置时用indexOf()。
+         * 在es5中，当指令用于全局作用域时，所有代码都将运行在严格模式下，当指令被用于函数作用域时，只有该函数
+         * 运行在严格模式下。es6规定在参数被解构或有默认参数的函数中禁止使用"use strict"。
+         * 
          * 
          * 
          */
@@ -288,6 +384,68 @@ export default class ES6 extends Component{
         // p1.then(function(value) {
         //     console.log(value);
         // });
+
+        // function toUint32(value) {
+        //     return Math.floor(Math.abs(Number(value))) % Math.pow(2, 32);
+        // }
+        // function isArrayIndex(key) {
+        //     let numericKey = toUint32(key);
+        //     return String(numericKey) === key && numericKey < (Math.pow(2, 32) - 1);
+        // }
+
+        // function createMyArray(length=0) {
+        //     return new Proxy({ length }, {
+        //         set(trapTarget, key, value) {
+        //             let currentLength = Reflect.get(trapTarget, "length");
+        //             if (isArrayIndex(key)) {
+        //                 let numericKey = Number(key);
+        //                 if (numericKey >= currentLength) {
+        //                     Reflect.set(trapTarget, "length", numericKey + 1);
+        //                 }
+        //             } else if (key === "length") {
+        //                 if (value < currentLength) {
+        //                     for (let index = currentLength - 1; index >= value; index--) {
+        //                         Reflect.deleteProperty(trapTarget, index);
+        //                     }
+        //                 }
+        //             }
+
+        //             return Reflect.set(trapTarget, key, value);
+        //         }
+        //     });
+        // }
+
+        // class Thing { //在构造函数中返回代理
+        //     constructor() {
+        //         return new Proxy(this, {});
+        //     }
+        // }
+
+        function NoSuchProperty() {
+
+        }
+        let proxy = new Proxy({}, {
+            get(trapTarget, key, receiver) {
+                throw new ReferenceError(`${key} doesn't exist`);
+            }
+        });
+        NoSuchProperty.prototype = proxy;
+        class Square extends NoSuchProperty {
+            constructor(length, width) {
+                super();
+                this.length = length;
+                this.width = width;
+            }
+        }
+        let shape = new Square(2, 6);
+        let shapeProto = Object.getPrototypeOf(shape);
+        console.log(shapeProto === proxy);
+        let secondLevelProto = Object.getPrototypeOf(shapeProto);
+        console.log(secondLevelProto === proxy);
+        console.log(Square.prototype);
+
+
+        
 
 
 
