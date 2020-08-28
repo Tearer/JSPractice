@@ -12,6 +12,9 @@ import GoodParts from './components/GoodParts';
 import High from './components/High';
 import DontKnow from './components/DontKnow';
 import ES6 from './components/ES6';
+import Practice from './components/Practice';
+import Algorithm from './components/Algorithm';
+
 
 
 class App extends Component {
@@ -1328,6 +1331,8 @@ class App extends Component {
         <High/>
         <DontKnow/>
         <ES6/>
+        <Practice/>
+        <Algorithm/>
       </div>
     );
   }

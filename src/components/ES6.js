@@ -40,7 +40,10 @@ export default class ES6 extends Component{
          * 
          * 解构*
          * *
-         * 代码块语句不允许出现在赋值语句左侧，添加小括号后可以将块语句转化为一个表达式
+         * 代码块语句不允许出现在赋值语句左侧，添加小括号后可以将块语句转化为一个表达式，
+         * 如果省略了 var/let/const 声明符，就必须把 整个赋值表达式用 ( ) 括起来。因为如果不这样做，
+         * 语句左侧的 {..} 作为语句中的第一个元素就会被当作是一个块语句而不是一个对象：
+         * ( { x, y, z } = bar() );
          * 数组解构，可通过不定元素复制数组
          * 
          * Symbol*
@@ -55,7 +58,7 @@ export default class ES6 extends Component{
          * 
          * Set Map*
          * *
-         * Set集合唱被用于检查对象中是否存在某个健名，Map集合常被用于获取已存的信息
+         * Set集合常被用于检查对象中是否存在某个健名，Map集合常被用于获取已存的信息
          * Set集合中的forEach()
          * Set集合转成数组，array = [...set]，自动去重
          * 数组去重：newArray = [...new Set(array)]
@@ -67,6 +70,9 @@ export default class ES6 extends Component{
          * 
          * Iterator、Generator*
          * *
+         * Generator实现的核心在于上下文的保存，函数并没有真的被挂起，每一次yield，
+         * 其实都执行了一遍传入的生成器函数，只是在这个过程中间用了一个context对象储存上下文，
+         * 使得每次执行生成器函数的时候，都可以从上一个执行结果开始执行，看起来就像函数被挂起了一样。
          * 不能用箭头函数来创建生成器。
          * for-of循环通过调用Symbol.iterator方法来获取迭代器，
          * 如果只需迭代数组或集合中的值，用for-of循环代替for循环是个不错的选择。
@@ -101,7 +107,8 @@ export default class ES6 extends Component{
          * 内建对象继承，原本在内建对象中返回实例自身的方法将自动返回派生类的实例。
          * Symbol.species属性，实例对象在运行过程中，需要再次调用自身的构造函数时，会调用该属性指定的构造函数；
          * 每当在实例的方法中创建类的实例是必须使用这个构造函数；
-         * 通过Symbol.species可以定义当派生类的方法返回实例时，应该返回的值的类型。
+         * 通过Symbol.species可以定义当派生类的方法返回实例时，应该返回的值的类型，主要的用途是，
+         * 有些类库是在基类的基础上修改的，那么子类使用继承的方法时，作者可能希望返回基类的实例，而不是子类的实例。
          * 在类的构造函数中使用new.target
          * 
          * 改进的数组功能*
@@ -131,6 +138,7 @@ export default class ES6 extends Component{
          * resolve()和reject()，执行器成功完成时调用resolve()，失败时调用reject()；
          * 执行器函数本身会立刻执行，完成处理程序和拒绝处理程序总在执行器完成后被添加至任务队列的末尾。
          * 创建已处理的Promise：Promise.resolve()方法只接受一个参数并返回一个完成态的Promise，
+         * Promise.resolve('foo') 等价于 new Promise(resolve => resolve('foo'))
          * Promise.reject()方法创建已拒绝的Promise，
          * 如果向Promise.resolve()或Promise.reject()传入一个Promise，则会被直接返回，
          * 如果传入非Promise的thenable对象，则会创建一个新的Promise，并在then()函数中被调用。
@@ -421,28 +429,28 @@ export default class ES6 extends Component{
         //     }
         // }
 
-        function NoSuchProperty() {
+        // function NoSuchProperty() {
 
-        }
-        let proxy = new Proxy({}, {
-            get(trapTarget, key, receiver) {
-                throw new ReferenceError(`${key} doesn't exist`);
-            }
-        });
-        NoSuchProperty.prototype = proxy;
-        class Square extends NoSuchProperty {
-            constructor(length, width) {
-                super();
-                this.length = length;
-                this.width = width;
-            }
-        }
-        let shape = new Square(2, 6);
-        let shapeProto = Object.getPrototypeOf(shape);
-        console.log(shapeProto === proxy);
-        let secondLevelProto = Object.getPrototypeOf(shapeProto);
-        console.log(secondLevelProto === proxy);
-        console.log(Square.prototype);
+        // }
+        // let proxy = new Proxy({}, {
+        //     get(trapTarget, key, receiver) {
+        //         throw new ReferenceError(`${key} doesn't exist`);
+        //     }
+        // });
+        // NoSuchProperty.prototype = proxy;
+        // class Square extends NoSuchProperty {
+        //     constructor(length, width) {
+        //         super();
+        //         this.length = length;
+        //         this.width = width;
+        //     }
+        // }
+        // let shape = new Square(2, 6);
+        // let shapeProto = Object.getPrototypeOf(shape);
+        // console.log(shapeProto === proxy);
+        // let secondLevelProto = Object.getPrototypeOf(shapeProto);
+        // console.log(secondLevelProto === proxy);
+        // console.log(Square.prototype);
 
 
         
